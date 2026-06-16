@@ -7,7 +7,7 @@ from document_parser import is_supported_file, extract_text_from_file
 
 def remove_deleted_files(conn, current_files):
     """
-    Remove files from database that no longer exist in the directory.
+    Remove files from database that no longer exist in the directory
     """
     cursor = conn.cursor()
     cursor.execute("SELECT id, filepath FROM files;")
