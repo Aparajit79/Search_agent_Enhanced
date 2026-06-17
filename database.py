@@ -37,7 +37,6 @@ def run_indexer(target_folder):
                 filepath = os.path.join(root, file)
                 filename = os.path.basename(filepath)
                 
-                # Extract file text lines and insert them
                 content_lines = extract_text_from_file(filepath)
                 batch = []
                 for line_content, line_no in content_lines:

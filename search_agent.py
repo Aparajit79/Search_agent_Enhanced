@@ -9,17 +9,13 @@ if hasattr(sys.stdout, 'reconfigure'):
 TARGET_FOLDER = "documents"
 
 if __name__ == '__main__':
-    # Step 1: Create target folder if it does not exist
     if not os.path.exists(TARGET_FOLDER):
         print(f"Creating local folder '{TARGET_FOLDER}'...")
         os.makedirs(TARGET_FOLDER)
         print("Please place your files inside the 'documents' folder.")
         
-    # Step 2: Index all current files inside target folder
     run_indexer(TARGET_FOLDER)
-    
     print("\n" + "=" * 50)
-    print("Welcome to Search Agent!")
     print("Enter the query and press Enter.")
     print("Type 'exit' to quit.")
     print("=" * 50)

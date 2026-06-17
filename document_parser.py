@@ -1,7 +1,6 @@
 import os
 import pypdf
 import docx
-import pptx
 
 
 TEXT_EXTENSIONS = {
@@ -9,8 +8,8 @@ TEXT_EXTENSIONS = {
     '.js', '.ts', '.html', '.css', '.ini', '.cfg', '.yaml', 
     '.yml', '.sh', '.bat', '.ps1', '.c', '.cpp', '.h', '.java'
 }
-OFFICE_EXTENSIONS = {'.pdf', '.docx', '.pptx'}
-ALL_EXTENSIONS = TEXT_EXTENSIONS.union(OFFICE_EXTENSIONS)
+EXTRA_EXTENSIONS = {'.pdf', '.docx'}
+ALL_EXTENSIONS = TEXT_EXTENSIONS.union(EXTRA_EXTENSIONS)
 
 def extract_txt(filepath):
     lines = []
@@ -56,20 +55,6 @@ def extract_docx(filepath):
         print(f"Error reading Word document: {e}")
     return lines
 
-def extract_pptx(filepath):
-    lines = []
-    try:
-        prs = pptx.Presentation(filepath)
-        for slide_no, slide in enumerate(prs.slides, 1):
-            for shape in slide.shapes:
-                if hasattr(shape, "text") and shape.text.strip():
-                    for line in shape.text.splitlines():
-                        clean_line = line.strip()
-                        if clean_line:
-                            lines.append((clean_line, f"Slide {slide_no}"))
-    except Exception as e:
-        print(f"Error reading PowerPoint: {e}")
-    return lines
 
 def extract_text_from_file(filepath):
     _, ext = os.path.splitext(filepath.lower())
@@ -79,6 +64,4 @@ def extract_text_from_file(filepath):
         return extract_pdf(filepath)
     elif ext == '.docx':
         return extract_docx(filepath)
-    elif ext == '.pptx':
-        return extract_pptx(filepath)
     return []
