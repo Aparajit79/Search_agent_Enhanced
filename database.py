@@ -26,7 +26,6 @@ def run_indexer(target_folder):
     conn = sqlite3.connect(DATABASE_FILE)
     cursor = conn.cursor()
     
-    # Read and index all files in the documents folder
     for root, dirs, files in os.walk(target_folder):
         dirs[:] = [d for d in dirs if not d.startswith('.')]
         for file in files:
