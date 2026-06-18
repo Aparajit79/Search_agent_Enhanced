@@ -1,12 +1,12 @@
-import psycopg2
+# import psycopg2
 
-conn = psycopg2.connect(
-    host="localhost",
-    database="search_agent",
-    user="postgres",
-    password="123"
-)
+# conn = psycopg2.connect(
+#     host="localhost",
+#     database="search_agent",
+#     user="postgres",
+#     password="123"
+# )
 
-print("Connected Successfully!")
+# print("Connected Successfully!")
 
-conn.close()
+# conn.close()
