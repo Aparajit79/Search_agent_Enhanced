@@ -1,32 +1,25 @@
 import os
 import sys
 from document_parser import extract_text_from_file, ALL_EXTENSIONS
-
-try:
-    import psycopg2
-except ImportError:
-    print("\n[Error] The 'psycopg2' package is not installed.")
-    print("Please install it on this system using: pip install psycopg2-binary\n")
-    sys.exit(1)
+import psycopg2
 
 
 def get_connection():
-    try:
+    # try:
         return psycopg2.connect(
-            host="192.168.1.43",
-            port="5432",
+            host="localhost",
+            # port="5432",
             database="search_agent",
-            user="search_user",
-            password="password"
+            user="postgres",
+            password="123"
         )
-    except psycopg2.OperationalError as e:
-        print("\n" + "=" * 60)
-        print("[Error] Could not connect to the PostgreSQL server on localhost.")
-        print("Is the PostgreSQL server running and accepting connections on this system?")
-        print("-" * 60)
-        print(f"Technical details: {e}".strip())
-        print("=" * 60 + "\n")
-        sys.exit(1)
+    # except psycopg2.OperationalError as e:
+    #     print("\n" + "=" * 60)
+    #     print("[Error] Could not connect to the PostgreSQL server on localhost.")
+
+    #     print(f"Technical details: {e}".strip())
+    #     print("=" * 60 + "\n")
+    #     sys.exit(1)
 
 
 def init_database():
@@ -60,11 +53,11 @@ def run_indexer(target_folder):
     conn = get_connection()
     cursor = conn.cursor()
 
-    for root, dirs, files in os.walk(target_folder):
-        dirs[:] = [d for d in dirs if not d.startswith('.')]
+    for root, dirs, files in os.walk(target_folder): 
+        dirs[:] = [d for d in dirs if not d.startswith('.')] 
 
         for file in files:
-            if file.startswith('.'):
+            if file.startswith('.'): 
                 continue
 
             _, ext = os.path.splitext(file.lower())

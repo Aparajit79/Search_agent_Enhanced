@@ -6,7 +6,7 @@ from database import run_indexer, search_index
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
-TARGET_FOLDER = "documents"
+TARGET_FOLDER = "C:/Users/Developer/Desktop/Senthil"
 
 if __name__ == '__main__':
     if not os.path.exists(TARGET_FOLDER):
@@ -17,12 +17,12 @@ if __name__ == '__main__':
     run_indexer(TARGET_FOLDER)
     print("\n" + "=" * 50)
     print("Enter the query and press Enter.")
-    print("Type 'exit' to quit.")
+    print("Type 'exit' to quit the program.")
     print("=" * 50)
     
     while True:
         user_input = input("\nEnter search term: ").strip()
-        if user_input.lower() in ('exit', 'quit'):
+        if user_input.lower() == ("exit"):
             print("Thank You!")
             break
         if not user_input:
